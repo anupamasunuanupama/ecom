@@ -1,0 +1,31 @@
+{% extends "adminhome.html" %}
+{% block content %}
+<div class="container">
+ <table class="table table-striped bg-warning">   
+    <tr>
+        <th>Product Name</th>
+        <th>Price</th>
+        <th>Brand</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    {% for pro in products %}
+    {% if pro.product.Merchant == request.user %}
+    <tr>
+        <td>{{pro.product.Product_Name}}</td>
+        <td>{{pro.product.Product_Price}}</td>
+        <td>{{pro.product.Product_Brand}}</td>
+        <td>{{pro.product.Product_Category}}</td>
+        {% if pro.paymentstatus == False %}
+        <td style="color:yellow">Payment Pending</td>
+        {% else %}
+        <td style="color:green">Payment Done</td>
+        {% endif %}
+    </tr>
+    {% endif %}
+    {% endfor %}
+      
+</table>
+</div>
+{% endblock %}

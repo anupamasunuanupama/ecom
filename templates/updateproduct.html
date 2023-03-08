@@ -1,0 +1,72 @@
+{% extends 'adminhome.html'%}
+{% block content %}
+<style>
+    .productupdate{
+          width:80%;
+          height: auto;
+          border: 4px solid olivedrab;
+          margin: auto;
+          padding: 20px;
+    }
+    .productupdate h3{
+        text-align: center;
+        text-decoration: underline;
+    }
+    .productupdate input{
+        width: auto;
+        padding: 5px;
+        border: .5px solid rgb(139, 139, 195);
+    }
+</style>
+<div class="container">
+    <div class="productupdate mt-5">
+        <h3>Update Product</h3>
+        {% for message in messages %}
+   <h5 style="color:red">{{message}}</h5>
+   {% endfor %}
+        {% for item in product %}
+        <div class="row">
+            <div class="col-md-6">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                <table class="table">
+                    <tr>
+                        <th><label for="">Product_Name:</label></th>
+                        <td><input type="text" name="pname" value="{{item.Product_Name}}"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="">Product Brand:</label></th>
+                        <td><input type="text" name="pbrand" value="{{item.Product_Brand}}"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="">Product Description:</label></th>
+                        <td><input type="text" name="pdis" value="{{item.Product_Discription}}"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="">Product Category:</label></th>
+                        <td><input type="text" name="pcat" value="{{item.Product_Category}}"></td>
+                    
+                    </tr>
+                    <tr>
+                        <th><label for="">Product Price:</label></th>
+                        <td><input type="text" name="price" value="{{item.Product_Price}}"></td>
+                    <tr>
+                        <th><label for="">Product_Stock:</label></th>
+                        <td><input type="text" name="pstock" value="{{item.Product_stock}}"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="">Upload image:</label></th>
+                        <td><input type="file" name="image" required></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="{{item.Product_Image.url}}" style="width:80%;height:80%;" alt="">
+                <button type="submit" class="btn btn-info">Update</button>
+            </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
